@@ -687,7 +687,9 @@
       </div>
 
       <div>
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="46aebd9d-dee2-4774-843f-ca0a50531fd4">
+  <input type="hidden" name="subject" value="New inquiry from Kingdom Control Solutions website">
           <div class="form-group">
             <label for="name">Your Name</label>
             <input type="text" id="name" name="name" placeholder="Jane Smith" required />
@@ -713,7 +715,7 @@
             <textarea id="message" name="message" placeholder="Tell me about your project or challenge..." required></textarea>
           </div>
           <div class="form-submit">
-            <a href="#" class="btn btn-primary" id="formBtn" onclick="handleSubmit(event)">Send Message</a>
+            <button type="submit" class="btn btn-primary">Send Message</button>
           </div>
         </form>
         <div class="form-success" id="formSuccess">
