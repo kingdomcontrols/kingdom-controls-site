@@ -296,6 +296,14 @@
       font-size: 1.6rem;
       margin-bottom: 1rem;
       display: block;
+      min-height: 2.2rem;
+    }
+
+    .service-icon-img {
+      width: 2.2rem;
+      height: 2.2rem;
+      object-fit: contain;
+      filter: invert(51%) sepia(85%) saturate(2000%) hue-rotate(178deg) brightness(105%);
     }
 
     .service-name {
@@ -575,26 +583,29 @@
     <div class="section-divider"></div>
     <div class="services-grid">
       <a href="controls.html" class="service-card" style="text-decoration:none; display:block;">
-        <span class="service-icon">⚙️</span>
+        <span class="service-icon"><img src="/images/icons/controls.svg" alt="Controls Engineering" class="service-icon-img" onerror="this.style.display='none'"/></span>
         <div class="service-name">Controls Engineering</div>
         <p class="service-desc">Custom PLC and control system design, programming, and commissioning for industrial applications.</p>
         <p style="margin-top:1rem; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue);">Learn More →</p>
       </a>
-      <div class="service-card">
-        <span class="service-icon">🤖</span>
+      <a href="robotics.html" class="service-card" style="text-decoration:none; display:block;">
+        <span class="service-icon"><img src="/images/icons/robotics.svg" alt="Robotics" class="service-icon-img" onerror="this.style.display='none'"/></span>
         <div class="service-name">Robotics</div>
         <p class="service-desc">Robotic integration, programming, and optimization to improve throughput, precision, and safety.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🖥️</span>
+        <p style="margin-top:1rem; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue);">Learn More →</p>
+      </a>
+      <a href="scada.html" class="service-card" style="text-decoration:none; display:block;">
+        <span class="service-icon"><img src="/images/icons/scada.svg" alt="SCADA Systems" class="service-icon-img" onerror="this.style.display='none'"/></span>
         <div class="service-name">SCADA Systems</div>
         <p class="service-desc">Supervisory control and data acquisition system design, development, and deployment.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">⚡</span>
+        <p style="margin-top:1rem; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue);">Learn More →</p>
+      </a>
+      <a href="automation.html" class="service-card" style="text-decoration:none; display:block;">
+        <span class="service-icon"><img src="/images/icons/automation.svg" alt="Automation Consulting" class="service-icon-img" onerror="this.style.display='none'"/></span>
         <div class="service-name">Automation Consulting</div>
         <p class="service-desc">End-to-end automation strategy and engineering — from process analysis through full system design and implementation.</p>
-      </div>
+        <p style="margin-top:1rem; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue);">Learn More →</p>
+      </a>
     </div>
   </section>
 
@@ -638,28 +649,36 @@
     <div class="contact-grid">
       <div class="contact-info">
         <div class="contact-item">
-          <div class="contact-item-icon">✉</div>
+          <div class="contact-item-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
           <div>
             <div class="contact-item-label">Email</div>
             <a href="mailto:justin@kingdom-controls.com" class="contact-item-value">justin@kingdom-controls.com</a>
           </div>
         </div>
         <div class="contact-item">
-          <div class="contact-item-icon">☎</div>
+          <div class="contact-item-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.89 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.8 1.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
           <div>
             <div class="contact-item-label">Phone</div>
             <a href="tel:+18017095900" class="contact-item-value">801-709-5900</a>
           </div>
         </div>
         <div class="contact-item">
-          <div class="contact-item-icon">◎</div>
+          <div class="contact-item-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
           <div>
             <div class="contact-item-label">Location</div>
             <span class="contact-item-value">Utah &amp; surrounding region</span>
           </div>
         </div>
         <div class="contact-item">
-          <div class="contact-item-icon">🌐</div>
+          <div class="contact-item-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
           <div>
             <div class="contact-item-label">Web</div>
             <span class="contact-item-value">kingdom-controls.com</span>
