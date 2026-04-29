@@ -266,7 +266,7 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1px;
       background: rgba(14, 165, 233, 0.1);
       border: 1px solid rgba(14, 165, 233, 0.1);
@@ -331,7 +331,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
-      align-items: center;
+      align-items: start;
     }
 
     .about-text p {
@@ -341,38 +341,74 @@
       margin-bottom: 1.2rem;
     }
 
-    .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    /* INDUSTRIES PANEL */
+    .industries-panel {
+      display: flex;
+      flex-direction: column;
       gap: 1px;
       background: rgba(14, 165, 233, 0.1);
-      border: 1px solid rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.15);
     }
 
-    .stat-box {
+    .industry-item {
       background: var(--dark-2);
-      padding: 1.75rem 1.5rem;
-      text-align: center;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: background 0.2s;
+      position: relative;
     }
 
-    .stat-number {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 2.8rem;
-      font-weight: 800;
+    .industry-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--blue);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .industry-item:hover { background: var(--dark-3); }
+    .industry-item:hover::before { opacity: 1; }
+
+    .industry-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(14, 165, 233, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--blue);
-      line-height: 1;
-      display: block;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
     }
 
-    .stat-label {
+    .industry-name {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
+      font-size: 1rem;
+      font-weight: 700;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+
+    .industry-desc {
+      font-size: 0.82rem;
       color: var(--steel);
-      margin-top: 0.4rem;
-      display: block;
+      line-height: 1.5;
+    }
+
+    .industries-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
     }
 
     /* CONTACT */
@@ -620,22 +656,50 @@
         <p>From small-footprint automation upgrades to full-scale SCADA deployments and robotic integration, we bring focused engineering experience to every project — without the overhead of a large firm.</p>
         <a href="#contact" class="btn btn-outline" style="display:inline-block; margin-top: 0.5rem;">Start a Project</a>
       </div>
-      <div class="about-stats">
-        <div class="stat-box">
-          <span class="stat-number">4+</span>
-          <span class="stat-label">Service Areas</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-number">1:1</span>
-          <span class="stat-label">Direct Access</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-number">100%</span>
-          <span class="stat-label">Custom Work</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-number">Utah</span>
-          <span class="stat-label">Based &amp; Beyond</span>
+      <div>
+        <p class="industries-label">A Few Areas of Industry Experience</p>
+        <div class="industries-panel">
+
+          <div class="industry-item">
+            <div class="industry-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div>
+              <div class="industry-name">Power Generation</div>
+              <p class="industry-desc">CAT natural gas generators, switchgear controls, combustion safety systems, and safety certifications.</p>
+            </div>
+          </div>
+
+          <div class="industry-item">
+            <div class="industry-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 10h2"/><path d="M15 10h2"/><path d="M11 10h2"/></svg>
+            </div>
+            <div>
+              <div class="industry-name">Metals &amp; Manufacturing</div>
+              <p class="industry-desc">Steel mills, metals processing, and heavy manufacturing — complex multi-axis motion and process control.</p>
+            </div>
+          </div>
+
+          <div class="industry-item">
+            <div class="industry-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+            </div>
+            <div>
+              <div class="industry-name">Food Manufacturing</div>
+              <p class="industry-desc">Sanitary environments, process automation, and compliance-driven control system design.</p>
+            </div>
+          </div>
+
+          <div class="industry-item">
+            <div class="industry-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4"/><path d="M12 19v4"/><path d="M4.22 4.22l2.83 2.83"/><path d="M16.95 16.95l2.83 2.83"/><path d="M1 12h4"/><path d="M19 12h4"/><path d="M4.22 19.78l2.83-2.83"/><path d="M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <div>
+              <div class="industry-name">Hydraulics &amp; Fluid Power</div>
+              <p class="industry-desc">Hydraulic system controls, proportional valve integration, and closed-loop pressure and flow control.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -687,9 +751,7 @@
       </div>
 
       <div>
-        <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-  <input type="hidden" name="access_key" value="46aebd9d-dee2-4774-843f-ca0a50531fd4">
-  <input type="hidden" name="subject" value="New inquiry from Kingdom Control Solutions website">
+        <form class="contact-form" id="contactForm">
           <div class="form-group">
             <label for="name">Your Name</label>
             <input type="text" id="name" name="name" placeholder="Jane Smith" required />
@@ -715,7 +777,7 @@
             <textarea id="message" name="message" placeholder="Tell me about your project or challenge..." required></textarea>
           </div>
           <div class="form-submit">
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            <a href="#" class="btn btn-primary" id="formBtn" onclick="handleSubmit(event)">Send Message</a>
           </div>
         </form>
         <div class="form-success" id="formSuccess">
