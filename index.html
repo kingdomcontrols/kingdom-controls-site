@@ -396,19 +396,87 @@
       opacity: 0;
     }
 
-    /* ── RESPONSIVE ──────────────────────────────────── */
+    /* ── RESPONSIVE / MOBILE ─────────────────────────── */
     @media (max-width: 700px) {
-      html, body { overflow: auto; }
+      html, body { overflow: hidden; height: 100%; }
+
+      nav {
+        padding: 0.75rem 1.25rem;
+      }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.72rem; letter-spacing: 0.1em; }
+
       .split {
         flex-direction: column;
-        height: auto;
-        min-height: 100vh;
+        height: 100vh;
       }
-      .panel { min-height: 50vh; flex: 1 !important; }
+
+      /* Both panels start equal */
+      .panel {
+        flex: 1;
+        transition: flex 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+
+      /* Active panel expands, inactive contracts */
+      .split.touch-active .panel.touch-focus {
+        flex: 1.7;
+      }
+      .split.touch-active .panel:not(.touch-focus) {
+        flex: 0.3;
+      }
+
+      /* bg zoom & brighten on active */
+      .panel.touch-focus .panel-bg {
+        transform: scale(1.06);
+        filter: brightness(0.48) saturate(0.85);
+      }
+      .panel.touch-focus .panel-overlay {
+        background: linear-gradient(
+          to bottom,
+          rgba(9,12,16,0.15) 0%,
+          rgba(9,12,16,0.0) 40%,
+          rgba(9,12,16,0.45) 100%
+        );
+      }
+
+      /* Frame tightens on active */
+      .panel.touch-focus .panel-frame {
+        inset: 14px;
+        opacity: 0.75;
+      }
+
+      /* Title pops */
+      .panel.touch-focus .panel-title {
+        transform: translateY(-4px) scale(1.03);
+        letter-spacing: 0.06em;
+      }
+
+      /* Content reveals on active */
+      .panel.touch-focus .panel-label,
+      .panel.touch-focus .panel-sub,
+      .panel.touch-focus .panel-enter {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .panel.touch-focus .panel-divider {
+        width: 70px;
+        opacity: 1;
+      }
+
+      /* Title sizing */
+      .panel-title {
+        font-size: clamp(1.6rem, 7vw, 2.4rem);
+      }
+      .panel-sub {
+        font-size: 0.88rem;
+        max-width: 240px;
+      }
+
+      /* Divider becomes horizontal */
       .split-divider {
         top: 50%; bottom: auto;
         left: 0; right: 0;
-        width: auto;
+        width: 100%;
         height: 1px;
         background: linear-gradient(
           to right,
@@ -417,9 +485,55 @@
           rgba(14, 165, 233, 0.5) 80%,
           transparent 100%
         );
+        transition: top 0.45s cubic-bezier(0.77, 0, 0.175, 1);
       }
-      .center-badge { top: 50%; }
-      .panel-title { font-size: 2rem; }
+
+      /* Badge sits at the horizontal divider midpoint */
+      .center-badge {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90px;
+        height: 90px;
+        transition:
+          top 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+          width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+          height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .center-badge img {
+        width: 140px;
+      }
+
+      /* Badge slides up when any panel is active */
+      .split.touch-active .center-badge {
+        top: 58px;
+        width: 48px;
+        height: 48px;
+        transform: translate(-50%, 0);
+      }
+      .split.touch-active .center-badge img {
+        width: 72px;
+      }
+
+      /* Tap hint */
+      .bottom-hint {
+        font-size: 0.65rem;
+        bottom: 1.2rem;
+        white-space: nowrap;
+      }
+      .split.touch-active .bottom-hint {
+        opacity: 0;
+      }
+
+      /* Inactive collapsed panel — show just the title, shrunk */
+      .split.touch-active .panel:not(.touch-focus) .panel-title {
+        font-size: 1rem;
+        letter-spacing: 0.12em;
+      }
+      .split.touch-active .panel:not(.touch-focus) .panel-content {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -438,10 +552,10 @@
   </nav>
 
   <!-- SPLIT SCREEN -->
-  <div class="split">
+  <div class="split" id="split">
 
     <!-- BUILDING AUTOMATION -->
-    <a class="panel panel-building" href="/building">
+    <a class="panel panel-building" href="/building" data-panel="building">
 
       <div class="panel-bg"></div>
       <div class="panel-overlay"></div>
@@ -449,15 +563,10 @@
       <!-- Corner frame decoration -->
       <div class="panel-frame">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- top-left -->
           <polyline points="0,14 0,0 14,0" stroke="#0ea5e9" stroke-width="0.6" vector-effect="non-scaling-stroke"/>
-          <!-- top-right -->
           <polyline points="86,0 100,0 100,14" stroke="#0ea5e9" stroke-width="0.6" vector-effect="non-scaling-stroke"/>
-          <!-- bottom-left -->
           <polyline points="0,86 0,100 14,100" stroke="#0ea5e9" stroke-width="0.6" vector-effect="non-scaling-stroke"/>
-          <!-- bottom-right -->
           <polyline points="86,100 100,100 100,86" stroke="#0ea5e9" stroke-width="0.6" vector-effect="non-scaling-stroke"/>
-          <!-- inner slim rect -->
           <rect x="5" y="5" width="90" height="90" stroke="#0ea5e9" stroke-width="0.25" stroke-dasharray="3 5" opacity="0.4" vector-effect="non-scaling-stroke"/>
         </svg>
       </div>
@@ -487,7 +596,7 @@
     </div>
 
     <!-- INDUSTRIAL AUTOMATION -->
-    <a class="panel panel-industrial" href="/industrial">
+    <a class="panel panel-industrial" href="/industrial" data-panel="industrial">
 
       <div class="panel-bg"></div>
       <div class="panel-overlay"></div>
@@ -522,27 +631,62 @@
 
   </div><!-- /split -->
 
-  <div class="bottom-hint">Choose your sector &nbsp;↔&nbsp; Hover to explore</div>
+  <div class="bottom-hint" id="bottomHint">Choose your sector &nbsp;↔&nbsp; Hover to explore</div>
 
   <!-- PAGE TRANSITION OVERLAY -->
   <div class="page-transition" id="pageTransition"></div>
 
   <script>
-    // Intercept panel clicks — fade out, then navigate
-    document.querySelectorAll('.panel').forEach(panel => {
-      panel.addEventListener('click', function(e) {
-        e.preventDefault();
-        const dest = this.getAttribute('href');
-        const overlay = document.getElementById('pageTransition');
-        overlay.classList.add('active');
-        setTimeout(() => { window.location.href = dest; }, 520);
-      });
-    });
+    const isTouchDevice = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const split = document.getElementById('split');
+    const panels = document.querySelectorAll('.panel');
+    const hint = document.getElementById('bottomHint');
 
-    // If we arrived via back-button, fade in from dark
+    // ── TOUCH LOGIC ──────────────────────────────────────
+    if (isTouchDevice()) {
+      // Update hint text for touch
+      hint.textContent = 'Tap a sector to explore  ↕';
+
+      let activePanelEl = null;
+
+      panels.forEach(panel => {
+        panel.addEventListener('click', function(e) {
+          e.preventDefault();
+          const dest = this.getAttribute('href');
+
+          // If this panel is already active → navigate
+          if (this.classList.contains('touch-focus')) {
+            const overlay = document.getElementById('pageTransition');
+            overlay.classList.add('active');
+            setTimeout(() => { window.location.href = dest; }, 520);
+            return;
+          }
+
+          // Activate this panel, deactivate the other
+          panels.forEach(p => p.classList.remove('touch-focus'));
+          this.classList.add('touch-focus');
+          split.classList.add('touch-active');
+          activePanelEl = this;
+        });
+      });
+    }
+
+    // ── DESKTOP CLICK LOGIC ───────────────────────────────
+    if (!isTouchDevice()) {
+      panels.forEach(panel => {
+        panel.addEventListener('click', function(e) {
+          e.preventDefault();
+          const dest = this.getAttribute('href');
+          const overlay = document.getElementById('pageTransition');
+          overlay.classList.add('active');
+          setTimeout(() => { window.location.href = dest; }, 520);
+        });
+      });
+    }
+
+    // ── BACK BUTTON ───────────────────────────────────────
     window.addEventListener('pageshow', () => {
-      const overlay = document.getElementById('pageTransition');
-      overlay.classList.remove('active');
+      document.getElementById('pageTransition').classList.remove('active');
     });
   </script>
 </body>
