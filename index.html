@@ -35,7 +35,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 200;
-      padding: 1rem 2.5rem;
+      padding: 1.4rem 2.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -45,28 +45,9 @@
     }
 
     .nav-logo img {
-      height: 34px;
+      height: 48px;
       width: auto;
     }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--steel-light);
-      text-decoration: none;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 600;
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--blue); }
 
     /* ── SPLIT WRAPPER ───────────────────────────────── */
     .split {
@@ -293,73 +274,6 @@
       50%       { transform: translateY(5px); }
     }
 
-    /* ── DIVIDER LINE IN THE MIDDLE ──────────────────── */
-    .split-divider {
-      position: absolute;
-      top: 0; bottom: 0;
-      left: 50%;
-      width: 1px;
-      background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(14, 165, 233, 0.5) 20%,
-        rgba(14, 165, 233, 0.5) 80%,
-        transparent 100%
-      );
-      z-index: 10;
-      pointer-events: none;
-      transition: left 0.7s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    /* ── LOGO BADGE at center ────────────────────────── */
-    .center-badge {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 50;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      /* circle is modest — logo bleeds out beyond it */
-      width: clamp(100px, 14vw, 180px);
-      height: clamp(100px, 14vw, 180px);
-      background: rgba(9, 12, 16, 0.52);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(14, 165, 233, 0.28);
-      border-radius: 50%;
-      box-shadow:
-        0 0 40px rgba(9, 12, 16, 0.6),
-        0 0 20px rgba(14, 165, 233, 0.07);
-      transition:
-        top 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-        width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-        height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* On hover: slide up to just below nav, shrink circle */
-    .split:has(.panel:hover) .center-badge {
-      top: 62px;
-      width: clamp(52px, 5vw, 72px);
-      height: clamp(52px, 5vw, 72px);
-      transform: translate(-50%, 0);
-    }
-
-    /* Logo image — sized larger than circle so it bleeds out */
-    .center-badge img {
-      position: absolute;
-      width: clamp(160px, 22vw, 300px);
-      height: auto;
-      transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* Logo shrinks proportionally when badge shrinks */
-    .split:has(.panel:hover) .center-badge img {
-      width: clamp(70px, 8vw, 110px);
-    }
-
     /* ── PAGE TRANSITION OVERLAY ─────────────────────── */
     .page-transition {
       position: fixed;
@@ -402,22 +316,19 @@
 
       nav {
         padding: 0.75rem 1.25rem;
+        justify-content: center;
       }
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: 0.72rem; letter-spacing: 0.1em; }
 
       .split {
         flex-direction: column;
         height: 100vh;
       }
 
-      /* Both panels start equal */
       .panel {
         flex: 1;
         transition: flex 0.45s cubic-bezier(0.77, 0, 0.175, 1);
       }
 
-      /* Active panel expands, inactive contracts */
       .split.touch-active .panel.touch-focus {
         flex: 1.7;
       }
@@ -425,7 +336,6 @@
         flex: 0.3;
       }
 
-      /* bg zoom & brighten on active */
       .panel.touch-focus .panel-bg {
         transform: scale(1.06);
         filter: brightness(0.48) saturate(0.85);
@@ -438,20 +348,14 @@
           rgba(9,12,16,0.45) 100%
         );
       }
-
-      /* Frame tightens on active */
       .panel.touch-focus .panel-frame {
         inset: 14px;
         opacity: 0.75;
       }
-
-      /* Title pops */
       .panel.touch-focus .panel-title {
         transform: translateY(-4px) scale(1.03);
         letter-spacing: 0.06em;
       }
-
-      /* Content reveals on active */
       .panel.touch-focus .panel-label,
       .panel.touch-focus .panel-sub,
       .panel.touch-focus .panel-enter {
@@ -463,76 +367,19 @@
         opacity: 1;
       }
 
-      /* Title sizing */
-      .panel-title {
-        font-size: clamp(1.6rem, 7vw, 2.4rem);
-      }
-      .panel-sub {
-        font-size: 0.88rem;
-        max-width: 240px;
-      }
+      .panel-title { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+      .panel-sub { font-size: 0.88rem; max-width: 240px; }
 
-      /* Divider becomes horizontal */
-      .split-divider {
-        top: 50%; bottom: auto;
-        left: 0; right: 0;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(
-          to right,
-          transparent 0%,
-          rgba(14, 165, 233, 0.5) 20%,
-          rgba(14, 165, 233, 0.5) 80%,
-          transparent 100%
-        );
-        transition: top 0.45s cubic-bezier(0.77, 0, 0.175, 1);
-      }
-
-      /* Badge sits at the horizontal divider midpoint */
-      .center-badge {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90px;
-        height: 90px;
-        transition:
-          top 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-          width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-          height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-          transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .center-badge img {
-        width: 140px;
-      }
-
-      /* Badge slides up when any panel is active */
-      .split.touch-active .center-badge {
-        top: 58px;
-        width: 48px;
-        height: 48px;
-        transform: translate(-50%, 0);
-      }
-      .split.touch-active .center-badge img {
-        width: 72px;
-      }
-
-      /* Tap hint */
       .bottom-hint {
         font-size: 0.65rem;
         bottom: 1.2rem;
         white-space: nowrap;
       }
-      .split.touch-active .bottom-hint {
-        opacity: 0;
-      }
+      .split.touch-active .bottom-hint { opacity: 0; }
 
-      /* Inactive collapsed panel — show just the title, shrunk */
       .split.touch-active .panel:not(.touch-focus) .panel-title {
         font-size: 1rem;
         letter-spacing: 0.12em;
-      }
-      .split.touch-active .panel:not(.touch-focus) .panel-content {
-        justify-content: center;
       }
     }
   </style>
@@ -544,11 +391,7 @@
     <a class="nav-logo" href="/">
       <img src="/images/logo.svg" alt="Kingdom Control Solutions" onerror="this.style.display='none'">
     </a>
-    <ul class="nav-links">
-      <li><a href="/building">Building Automation</a></li>
-      <li><a href="/industrial">Industrial Automation</a></li>
-      <li><a href="mailto:justin@kingdom-controls.com">Contact</a></li>
-    </ul>
+
   </nav>
 
   <!-- SPLIT SCREEN -->
@@ -588,12 +431,6 @@
       </div>
 
     </a>
-
-    <!-- CENTER DIVIDER + BADGE -->
-    <div class="split-divider"></div>
-    <div class="center-badge">
-      <img src="/images/logo-small.svg" alt="KCS" onerror="this.style.opacity='0'">
-    </div>
 
     <!-- INDUSTRIAL AUTOMATION -->
     <a class="panel panel-industrial" href="/industrial" data-panel="industrial">
