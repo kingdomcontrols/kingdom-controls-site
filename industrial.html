@@ -86,10 +86,9 @@
 
     .s-bg {
       position: absolute;
-      inset: -10%;
+      inset: 0;
       background-size: cover;
       background-position: center;
-      will-change: transform;
     }
 
     .s-overlay {
@@ -489,7 +488,7 @@
         <div class="s-overlay"></div>
         <div class="s-content">
           <div class="hero-logo">
-            <img src="/images/Kingdom Logo with White text.png" alt="Kingdom Control Solutions" onerror="this.style.display='none'">
+            <img src="/images/logo.svg" alt="Kingdom Control Solutions" onerror="this.style.display='none'">
           </div>
           <div class="hero-rule"></div>
           <p class="hero-quote">Precision where it counts.<br>Control when it matters most.</p>
@@ -655,9 +654,6 @@
       requestAnimationFrame(() => {
         document.getElementById('pageTransition').classList.add('out');
       });
-
-      // Parallax loop
-      requestAnimationFrame(parallax);
     }
 
     // ── GO TO SECTION ─────────────────────────────────
@@ -740,18 +736,6 @@
       if (e.key === 'ArrowDown' || e.key === 'PageDown') goTo(current + 1);
       if (e.key === 'ArrowUp'   || e.key === 'PageUp')   goTo(current - 1);
     });
-
-    // ── PARALLAX ──────────────────────────────────────
-    function parallax() {
-      sections.forEach((s, i) => {
-        const bg = s.querySelector('.s-bg');
-        if (bg && i !== SECTION_COUNT - 1) {
-          const offset = (i - current) * 15;
-          bg.style.transform = `translateY(${offset}px)`;
-        }
-      });
-      requestAnimationFrame(parallax);
-    }
 
     // ── CONTACT FORM ──────────────────────────────────
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
