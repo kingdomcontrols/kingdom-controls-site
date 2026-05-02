@@ -211,31 +211,30 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: var(--dark);
+      background: transparent;
     }
 
-    /* subtle texture overlay so it doesn't look flat */
+    /* dark gradient that fades in from bottom — hero image visible at top edge */
     .about-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(14,165,233,0.03) 0%, transparent 60%);
+      background: linear-gradient(to bottom, rgba(9,12,16,0.55) 0%, rgba(9,12,16,0.92) 35%, rgba(9,12,16,0.97) 100%);
       pointer-events: none;
     }
 
     .about-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(9,12,16,0.0);
+      background: none;
     }
 
     .about-inner {
       position: relative;
       z-index: 2;
       width: 100%;
-      padding: 7rem 2rem;
+      padding: 7rem clamp(1.5rem, 6vw, 8rem);
       display: flex;
       justify-content: flex-end;
-      padding-right: clamp(2rem, 8vw, 9rem);
     }
 
     /* main opaque card */
@@ -249,7 +248,7 @@
       width: 100%;
     }
 
-    /* accent boxes */
+    /* accent boxes — kept inside card bounds, no negative left overhang */
     .about-card::before {
       content: '';
       position: absolute;
@@ -269,11 +268,11 @@
       opacity: 0.5;
     }
 
-    /* floating accent pill */
+    /* floating accent pill — repositioned inside card's left edge */
     .about-accent {
       position: absolute;
-      top: 2.5rem;
-      left: -5rem;
+      top: -3rem;
+      left: 0;
       background: rgba(14,165,233,0.07);
       border: 1px solid rgba(14,165,233,0.2);
       padding: 0.9rem 1.2rem;
@@ -299,8 +298,8 @@
 
     .about-accent-2 {
       position: absolute;
-      bottom: 3.5rem;
-      left: -4rem;
+      bottom: -3rem;
+      right: 0;
       background: rgba(9,12,16,0.75);
       border: 1px solid rgba(14,165,233,0.15);
       padding: 0.7rem 1rem;
@@ -455,7 +454,6 @@
       inset: 0;
       background-size: cover;
       background-position: center;
-      background-attachment: fixed;
     }
 
     .industry-overlay {
@@ -542,9 +540,11 @@
     }
 
     /* industry images & overlays */
-    #ind-furnace .industry-bg {
+    #ind-metals .industry-bg {
       background-image: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1800&q=80');
       filter: brightness(0.35) saturate(0.6);
+    }
+    #ind-metals .industry-overlay {
       background: linear-gradient(to right, rgba(9,12,16,0.92) 42%, rgba(9,12,16,0.15) 100%);
     }
 
@@ -783,7 +783,7 @@
       .nav-links a { font-size: 0.7rem; letter-spacing: 0.12em; }
       .nav-back { padding-left: 1rem; font-size: 0.65rem; }
 
-      .about-inner { padding: 5rem 1.25rem; justify-content: center; }
+      .about-inner { padding: 6rem 1.25rem; justify-content: center; }
       .about-accent, .about-accent-2 { display: none; }
       .about-card { padding: 2rem 1.5rem 2.5rem; }
 
@@ -850,17 +850,6 @@
     <div class="about-overlay"></div>
     <div class="about-inner">
 
-      <!-- floating accent boxes -->
-      <div class="about-accent reveal">
-        <div class="about-accent-label">Experience</div>
-        <div class="about-accent-val">15+</div>
-        <div style="font-size:0.7rem;color:var(--steel);margin-top:0.2rem">Years</div>
-      </div>
-      <div class="about-accent-2 reveal reveal-delay-1">
-        <div class="about-accent-label">Industries</div>
-        <div class="about-accent-val" style="font-size:1.2rem">Multi</div>
-      </div>
-
       <!-- main card -->
       <div class="about-card">
         <p class="card-label reveal">Kingdom Control Solutions</p>
@@ -888,10 +877,6 @@
           What sets us apart: independent, vendor-neutral expertise with the flexibility of a boutique firm and the depth of a seasoned integrator.
         </p>
 
-        <div class="scroll-prompt reveal reveal-delay-4">
-          <div class="scroll-prompt-line"></div>
-          <span>Continue scrolling to see industries we serve</span>
-        </div>
       </div>
 
     </div>
@@ -933,15 +918,15 @@
   <!-- ── INDUSTRIES ─────────────────────────────────────── -->
   <div id="industries">
 
-    <!-- 1: Furnace / Metals -->
-    <div class="industry" id="ind-furnace">
+    <!-- 1: Metals -->
+    <div class="industry" id="ind-metals">
       <div class="industry-bg"></div>
       <div class="industry-overlay"></div>
       <div class="industry-content">
         <div class="industry-card">
           <div class="industry-number reveal">01</div>
           <p class="ind-label reveal">Metals Industry</p>
-          <h2 class="ind-title reveal reveal-delay-1">Furnace Safety &<br>Process Control</h2>
+          <h2 class="ind-title reveal reveal-delay-1">Metals Processing<br>& Controls</h2>
           <div class="ind-rule reveal reveal-delay-2"></div>
           <p class="ind-desc reveal reveal-delay-2">High-temperature process controls for melting and homogenizing metals. Combustion safety, burner management systems, and real-time temperature profiling in steel mills and metals processing facilities.</p>
           <div class="ind-tags reveal reveal-delay-3">
