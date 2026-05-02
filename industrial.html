@@ -92,14 +92,24 @@
     .nav-back:hover svg { transform: translateX(-3px); }
 
     /* ─── HERO ─────────────────────────────────────────── */
+    /* Fixed behind everything — content scrolls over it */
     #hero {
-      position: relative;
+      position: fixed;
+      top: 0; left: 0; right: 0;
       height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      z-index: 0;
+    }
+
+    /* Pushes scrollable content down by one viewport */
+    .hero-spacer {
+      height: 100vh;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
     }
 
     .hero-bg {
@@ -196,27 +206,26 @@
     /* ─── ABOUT SECTION ────────────────────────────────── */
     #about {
       position: relative;
+      z-index: 2;
       min-height: 100vh;
       display: flex;
       align-items: center;
       overflow: hidden;
+      background: var(--dark);
     }
 
-    /* same image continues behind */
+    /* subtle texture overlay so it doesn't look flat */
     .about-bg {
       position: absolute;
       inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1800&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      filter: brightness(0.22) saturate(0.5);
+      background: linear-gradient(135deg, rgba(14,165,233,0.03) 0%, transparent 60%);
+      pointer-events: none;
     }
 
     .about-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(9,12,16,0.45);
+      background: rgba(9,12,16,0.0);
     }
 
     .about-inner {
@@ -376,6 +385,7 @@
     /* ─── DIFFERENTIATORS ──────────────────────────────── */
     #differentiators {
       position: relative;
+      z-index: 2;
       padding: 5rem 2rem;
       background: var(--dark-2);
       border-top: 1px solid rgba(14,165,233,0.07);
@@ -429,6 +439,7 @@
     /* ─── INDUSTRIES ───────────────────────────────────── */
     #industries {
       position: relative;
+      z-index: 2;
     }
 
     .industry {
@@ -533,15 +544,13 @@
     /* industry images & overlays */
     #ind-furnace .industry-bg {
       background-image: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1800&q=80');
-      filter: brightness(0.22) saturate(0.5);
-    }
-    #ind-furnace .industry-overlay {
+      filter: brightness(0.35) saturate(0.6);
       background: linear-gradient(to right, rgba(9,12,16,0.92) 42%, rgba(9,12,16,0.15) 100%);
     }
 
     #ind-food .industry-bg {
       background-image: url('https://images.unsplash.com/photo-1606791422814-b32c705e3e2f?w=1800&q=80');
-      filter: brightness(0.22) saturate(0.5);
+      filter: brightness(0.35) saturate(0.6);
     }
     #ind-food .industry-overlay {
       background: linear-gradient(to left, rgba(9,12,16,0.92) 42%, rgba(9,12,16,0.15) 100%);
@@ -549,7 +558,7 @@
 
     #ind-power .industry-bg {
       background-image: url('https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=1800&q=80');
-      filter: brightness(0.22) saturate(0.5);
+      filter: brightness(0.35) saturate(0.6);
     }
     #ind-power .industry-overlay {
       background: linear-gradient(to right, rgba(9,12,16,0.92) 42%, rgba(9,12,16,0.15) 100%);
@@ -557,7 +566,7 @@
 
     #ind-scada .industry-bg {
       background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1800&q=80');
-      filter: brightness(0.22) saturate(0.5);
+      filter: brightness(0.35) saturate(0.6);
     }
     #ind-scada .industry-overlay {
       background: linear-gradient(to left, rgba(9,12,16,0.92) 42%, rgba(9,12,16,0.15) 100%);
@@ -565,6 +574,8 @@
 
     /* ─── CONTACT ───────────────────────────────────────── */
     #contact {
+      position: relative;
+      z-index: 2;
       padding: 7rem 2rem;
       max-width: 760px;
       margin: 0 auto;
@@ -682,6 +693,8 @@
 
     /* ─── FOOTER ────────────────────────────────────────── */
     footer {
+      position: relative;
+      z-index: 2;
       border-top: 1px solid rgba(14,165,233,0.08);
       padding: 1.8rem 2.5rem;
       display: flex;
@@ -828,6 +841,8 @@
       <div class="scroll-line"></div>
     </div>
   </section>
+
+  <div class="hero-spacer"></div>
 
   <!-- ── ABOUT ─────────────────────────────────────────── -->
   <section id="about">
