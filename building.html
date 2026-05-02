@@ -778,11 +778,12 @@
 
     /* ─── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.25rem; }
-      .nav-logo img { height: 36px; }
-      .nav-links { gap: 1.2rem; }
-      .nav-links a { font-size: 0.7rem; letter-spacing: 0.12em; }
-      .nav-back { padding-left: 1rem; font-size: 0.65rem; }
+  nav { padding: 0.75rem 1rem; flex-wrap: nowrap; gap: 0.5rem; }
+  .nav-logo img { height: 28px; }
+  .nav-links { gap: 0.6rem; flex-shrink: 1; min-width: 0; }
+  .nav-links a { font-size: 0.62rem; letter-spacing: 0.08em; white-space: nowrap; }
+  .nav-back { padding-left: 0.6rem; font-size: 0.6rem; letter-spacing: 0.1em; white-space: nowrap; }
+  .nav-back svg { width: 11px; height: 11px; }
 
       .about-inner { padding: 6rem 1.25rem; justify-content: center; }
       .about-accent, .about-accent-2 { display: none; }
