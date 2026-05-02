@@ -57,6 +57,32 @@
       position: relative;
     }
 
+    /* ── CENTER DIVIDER LINE ─── */
+.split-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--blue) 15%,
+    var(--blue) 85%,
+    transparent 100%
+  );
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.4;
+  transition: left 0.35s cubic-bezier(0.77, 0, 0.175, 1),
+              opacity 0.35s ease;
+}
+
+/* shifts with the panel expansion, fades slightly on hover */
+.split:has(.panel:hover) .split-divider {
+  opacity: 0.2;
+}
+
     /* ── EACH PANEL ──────────────────────────────────── */
     .panel {
       position: relative;
@@ -396,6 +422,7 @@
 
   <!-- SPLIT SCREEN -->
   <div class="split" id="split">
+    <div class="split-divider"></div>
 
     <!-- BUILDING AUTOMATION -->
     <a class="panel panel-building" href="/building" data-panel="building">
