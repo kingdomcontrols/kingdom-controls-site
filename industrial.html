@@ -1104,6 +1104,7 @@
     // ── HERO FADE ON SCROLL ───────────────────────────────
     const heroContent = document.getElementById('heroContent');
     const heroHint = document.querySelector('.hero-scroll-hint');
+    const heroEl = document.getElementById('hero');
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       const vh = window.innerHeight;
@@ -1115,6 +1116,8 @@
       if (heroHint) {
         heroHint.style.opacity = Math.max(0, 1 - progress * 3);
       }
+      // hide the whole fixed hero once about section covers it
+      heroEl.style.visibility = y >= vh ? 'hidden' : 'visible';
     }, { passive: true });
 
     // ── SCROLL REVEAL ─────────────────────────────────────
