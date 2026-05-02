@@ -1103,23 +1103,31 @@
     }, { passive: true });
 
     // ── HERO FADE ON SCROLL ───────────────────────────────
-    const heroContent = document.getElementById('heroContent');
-    const heroHint = document.querySelector('.hero-scroll-hint');
-    const heroEl = document.getElementById('hero');
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      const vh = window.innerHeight;
-      const progress = Math.min(y / (vh * 0.6), 1);
-      const opacity = 1 - progress;
-      const translateY = progress * -40;
-      heroContent.style.opacity = opacity;
-      heroContent.style.transform = `translateY(${translateY}px)`;
-      if (heroHint) {
-        heroHint.style.opacity = Math.max(0, 1 - progress * 3);
-      }
-      // hide the whole fixed hero once about section covers it
-      heroEl.style.visibility = y >= vh ? 'hidden' : 'visible';
-    }, { passive: true });
+const heroContent = document.getElementById('heroContent');
+const heroHint = document.querySelector('.hero-scroll-hint');
+const heroEl = document.getElementById('hero');
+const navLogo = document.querySelector('.nav-logo img');
+
+// start nav logo hidden
+navLogo.style.opacity = '0';
+navLogo.style.transition = 'opacity 0.3s ease';
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const vh = window.innerHeight;
+  const progress = Math.min(y / (vh * 0.6), 1);
+  const opacity = 1 - progress;
+  const translateY = progress * -40;
+  heroContent.style.opacity = opacity;
+  heroContent.style.transform = `translateY(${translateY}px)`;
+  if (heroHint) {
+    heroHint.style.opacity = Math.max(0, 1 - progress * 3);
+  }
+  // nav logo fades in exactly as hero logo fades out
+  navLogo.style.opacity = progress;
+  // hide the whole fixed hero once about section covers it
+  heroEl.style.visibility = y >= vh ? 'hidden' : 'visible';
+}, { passive: true });
 
     // ── SCROLL REVEAL ─────────────────────────────────────
     const reveals = document.querySelectorAll('.reveal');
