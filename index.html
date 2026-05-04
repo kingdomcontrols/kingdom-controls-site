@@ -589,26 +589,32 @@
       let activePanelEl = null;
 
       panels.forEach(panel => {
-        panel.addEventListener('click', function(e) {
-          e.preventDefault();
-          const dest = this.getAttribute('href');
+  panel.addEventListener('click', function(e) {
+    e.preventDefault();
+    const dest = this.getAttribute('href');
 
-          // If this panel is already active → navigate
-          if (this.classList.contains('touch-focus')) {
-            const overlay = document.getElementById('pageTransition');
-            overlay.classList.add('active');
-            setTimeout(() => { window.location.href = dest; }, 520);
-            return;
-          }
-
-          // Activate this panel, deactivate the other
-          panels.forEach(p => p.classList.remove('touch-focus'));
-          this.classList.add('touch-focus');
-          split.classList.add('touch-active');
-          activePanelEl = this;
-        });
-      });
+    // second tap on already-focused panel → navigate
+    if (this.classList.contains('touch-focus')) {
+      const overlay = document.getElementById('pageTransition');
+      overlay.classList.add('active');
+      setTimeout(() => { window.location.href = dest; }, 520);
+      return;
     }
+
+    // first tap on either panel — reset all, activate this one
+    panels.forEach(p => p.classList.remove('touch-focus'));
+    split.classList.remove('touch-active');
+
+    // small delay so the reset is visible before expanding
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.classList.add('touch-focus');
+        split.classList.add('touch-active');
+        activePanelEl = this;
+      });
+    });
+  });
+});
 
     // ── DESKTOP CLICK LOGIC ───────────────────────────────
     if (!isTouchDevice()) {
