@@ -347,107 +347,139 @@
 
     /* ── RESPONSIVE / MOBILE ─────────────────────────── */
     @media (max-width: 700px) {
-      html, body { overflow: hidden; height: 100%; }
+  html, body { overflow: hidden; height: 100%; }
 
-      .split-divider {
-  top: 50%;
-  bottom: auto;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--blue) 15%,
-    var(--blue) 85%,
-    transparent 100%
-  );
-  transition: top 0.45s cubic-bezier(0.77, 0, 0.175, 1),
-              opacity 0.35s ease;
+  nav {
+    padding: 0.6rem 1rem;
+    justify-content: center;
+  }
+
+  .nav-logo img {
+    height: 28px;
+  }
+
+  .split {
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .panel {
+    flex: 1;
+    transition: flex 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  .split.touch-active .panel.touch-focus {
+    flex: 1.7;
+  }
+  .split.touch-active .panel:not(.touch-focus) {
+    flex: 0.3;
+  }
+
+  .panel.touch-focus .panel-bg {
+    transform: scale(1.06);
+    filter: brightness(0.48) saturate(0.85);
+  }
+  .panel.touch-focus .panel-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(9,12,16,0.15) 0%,
+      rgba(9,12,16,0.0) 40%,
+      rgba(9,12,16,0.45) 100%
+    );
+  }
+  .panel.touch-focus .panel-frame {
+    inset: 14px;
+    opacity: 0.75;
+  }
+  .panel.touch-focus .panel-title {
+    transform: translateY(-4px) scale(1.03);
+    letter-spacing: 0.06em;
+  }
+  .panel.touch-focus .panel-label,
+  .panel.touch-focus .panel-sub,
+  .panel.touch-focus .panel-enter {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .panel.touch-focus .panel-divider {
+    width: 50px;
+    opacity: 1;
+  }
+
+  .panel-content {
+    padding: 1rem;
+  }
+
+  .panel-title {
+    font-size: clamp(1.4rem, 8vw, 2rem);
+    line-height: 1.0;
+  }
+
+  .panel-divider {
+    margin: 0.6rem auto;
+  }
+
+  .panel-sub {
+    font-size: 0.78rem;
+    max-width: 220px;
+  }
+
+  .panel-enter {
+    margin-top: 1rem;
+  }
+
+  /* horizontal divider */
+  .split-divider {
+    top: 50%;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--blue) 15%,
+      var(--blue) 85%,
+      transparent 100%
+    );
+    transition: top 0.45s cubic-bezier(0.77, 0, 0.175, 1),
+                opacity 0.35s ease;
+  }
+
+  .split.touch-active .split-divider {
+    opacity: 0.2;
+  }
+
+  .split.touch-active .panel.touch-focus:first-child ~ .split-divider {
+    top: 63%;
+  }
+
+  .split.touch-active .panel:not(.touch-focus):first-child ~ .split-divider {
+    top: 37%;
+  }
+
+  .bottom-hint {
+    font-size: 0.6rem;
+    bottom: 1rem;
+    white-space: nowrap;
+  }
+
+  .split.touch-active .bottom-hint {
+    opacity: 0;
+  }
+
+  .split.touch-active .panel:not(.touch-focus) .panel-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+  }
 }
 
-.split.touch-active .panel.touch-focus ~ .split-divider,
-.split.touch-active .split-divider {
-  opacity: 0.2;
+@media (max-width: 400px) {
+  .nav-logo img { height: 24px; }
+  .panel-title { font-size: clamp(1.2rem, 7vw, 1.6rem); }
 }
-
-.split.touch-active .panel.touch-focus:first-child ~ .split-divider {
-  top: 63%;
-}
-
-.split.touch-active .panel:not(.touch-focus):first-child ~ .split-divider {
-  top: 37%;
-}
-      
-      nav {
-        padding: 0.75rem 1.25rem;
-        justify-content: center;
-      }
-
-      .split {
-        flex-direction: column;
-        height: 100vh;
-      }
-
-      .panel {
-        flex: 1;
-        transition: flex 0.45s cubic-bezier(0.77, 0, 0.175, 1);
-      }
-
-      .split.touch-active .panel.touch-focus {
-        flex: 1.7;
-      }
-      .split.touch-active .panel:not(.touch-focus) {
-        flex: 0.3;
-      }
-
-      .panel.touch-focus .panel-bg {
-        transform: scale(1.06);
-        filter: brightness(0.48) saturate(0.85);
-      }
-      .panel.touch-focus .panel-overlay {
-        background: linear-gradient(
-          to bottom,
-          rgba(9,12,16,0.15) 0%,
-          rgba(9,12,16,0.0) 40%,
-          rgba(9,12,16,0.45) 100%
-        );
-      }
-      .panel.touch-focus .panel-frame {
-        inset: 14px;
-        opacity: 0.75;
-      }
-      .panel.touch-focus .panel-title {
-        transform: translateY(-4px) scale(1.03);
-        letter-spacing: 0.06em;
-      }
-      .panel.touch-focus .panel-label,
-      .panel.touch-focus .panel-sub,
-      .panel.touch-focus .panel-enter {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .panel.touch-focus .panel-divider {
-        width: 70px;
-        opacity: 1;
-      }
-
-      .panel-title { font-size: clamp(1.6rem, 7vw, 2.4rem); }
-      .panel-sub { font-size: 0.88rem; max-width: 240px; }
-
-      .bottom-hint {
-        font-size: 0.65rem;
-        bottom: 1.2rem;
-        white-space: nowrap;
-      }
-      .split.touch-active .bottom-hint { opacity: 0; }
-
-      .split.touch-active .panel:not(.touch-focus) .panel-title {
-        font-size: 1rem;
-        letter-spacing: 0.12em;
-      }
-    }
   </style>
 </head>
 <body>
