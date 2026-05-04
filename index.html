@@ -576,63 +576,61 @@
   <div class="page-transition" id="pageTransition"></div>
 
   <script>
-    const isTouchDevice = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-    const split = document.getElementById('split');
-    const panels = document.querySelectorAll('.panel');
-    const hint = document.getElementById('bottomHint');
+  const isTouchDevice = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  const split = document.getElementById('split');
+  const panels = document.querySelectorAll('.panel');
 
-    // ── TOUCH LOGIC ──────────────────────────────────────
-    if (isTouchDevice()) {
-      // Update hint text for touch
-      hint.textContent = 'Tap a sector to explore  ↕';
+  // ── TOUCH LOGIC ──────────────────────────────────────
+  if (isTouchDevice()) {
 
-      let activePanelEl = null;
+    let activePanelEl = null;
 
-      panels.forEach(panel => {
-  panel.addEventListener('click', function(e) {
-    e.preventDefault();
-    const dest = this.getAttribute('href');
+    panels.forEach(panel => {
+      panel.addEventListener('click', function(e) {
+        e.preventDefault();
+        const dest = this.getAttribute('href');
 
-    // second tap on already-focused panel → navigate
-    if (this.classList.contains('touch-focus')) {
-      const overlay = document.getElementById('pageTransition');
-      overlay.classList.add('active');
-      setTimeout(() => { window.location.href = dest; }, 520);
-      return;
-    }
-
-    // first tap on either panel — reset all, activate this one
-    panels.forEach(p => p.classList.remove('touch-focus'));
-    split.classList.remove('touch-active');
-
-    // small delay so the reset is visible before expanding
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        this.classList.add('touch-focus');
-        split.classList.add('touch-active');
-        activePanelEl = this;
-      });
-    });
-  });
-});
-
-    // ── DESKTOP CLICK LOGIC ───────────────────────────────
-    if (!isTouchDevice()) {
-      panels.forEach(panel => {
-        panel.addEventListener('click', function(e) {
-          e.preventDefault();
-          const dest = this.getAttribute('href');
+        // second tap on already-focused panel → navigate
+        if (this.classList.contains('touch-focus')) {
           const overlay = document.getElementById('pageTransition');
           overlay.classList.add('active');
           setTimeout(() => { window.location.href = dest; }, 520);
+          return;
+        }
+
+        // first tap — reset all, then activate this one
+        panels.forEach(p => p.classList.remove('touch-focus'));
+        split.classList.remove('touch-active');
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            this.classList.add('touch-focus');
+            split.classList.add('touch-active');
+            activePanelEl = this;
+          });
         });
       });
-    }
-
-    // ── BACK BUTTON ───────────────────────────────────────
-    window.addEventListener('pageshow', () => {
-      document.getElementById('pageTransition').classList.remove('active');
     });
-  </script>
+
+  }
+
+  // ── DESKTOP CLICK LOGIC ───────────────────────────────
+  if (!isTouchDevice()) {
+    panels.forEach(panel => {
+      panel.addEventListener('click', function(e) {
+        e.preventDefault();
+        const dest = this.getAttribute('href');
+        const overlay = document.getElementById('pageTransition');
+        overlay.classList.add('active');
+        setTimeout(() => { window.location.href = dest; }, 520);
+      });
+    });
+  }
+
+  // ── BACK BUTTON ───────────────────────────────────────
+  window.addEventListener('pageshow', () => {
+    document.getElementById('pageTransition').classList.remove('active');
+  });
+</script>
 </body>
 </html>
