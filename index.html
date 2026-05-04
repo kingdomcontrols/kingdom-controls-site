@@ -349,6 +349,37 @@
     @media (max-width: 700px) {
       html, body { overflow: hidden; height: 100%; }
 
+      .split-divider {
+  top: 50%;
+  bottom: auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--blue) 15%,
+    var(--blue) 85%,
+    transparent 100%
+  );
+  transition: top 0.45s cubic-bezier(0.77, 0, 0.175, 1),
+              opacity 0.35s ease;
+}
+
+.split.touch-active .panel.touch-focus ~ .split-divider,
+.split.touch-active .split-divider {
+  opacity: 0.2;
+}
+
+.split.touch-active .panel.touch-focus:first-child ~ .split-divider {
+  top: 63%;
+}
+
+.split.touch-active .panel:not(.touch-focus):first-child ~ .split-divider {
+  top: 37%;
+}
+      
       nav {
         padding: 0.75rem 1.25rem;
         justify-content: center;
@@ -431,7 +462,6 @@
 
   <!-- SPLIT SCREEN -->
   <div class="split" id="split">
-    <div class="split-divider"></div>
 
     <!-- BUILDING AUTOMATION -->
     <a class="panel panel-building" href="/building" data-panel="building">
@@ -501,7 +531,8 @@
       </div>
 
     </a>
-
+    <div class="split-divider"></div>
+    
   </div><!-- /split -->
 
   <!-- PAGE TRANSITION OVERLAY -->
